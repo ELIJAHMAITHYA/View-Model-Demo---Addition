@@ -10,7 +10,7 @@ class GameViewModel : ViewModel() {
     val uistate = _uiState.asStateFlow()
 
     fun findSum() {
-        var output = uistate.value.number1.toInt() + uistate.value.number2.toInt()
+        var output =_uiState.value.number1.toInt() + _uiState.value.number2.toInt()
         _uiState.update {
             it.copy(
                 outPut = output.toString()
@@ -18,18 +18,18 @@ class GameViewModel : ViewModel() {
         }
     }
 
-    fun UpDateNum1() {
+    fun UpDateNum1(number1: String) {
         _uiState.update {
             it.copy(
-                number1 = uistate.value.number1.toString()
+                number1 = number1
             )
         }
     }
 
-    fun UpdateNum2() {
+    fun UpdateNum2(number2: String) {
         _uiState.update {
             it.copy(
-                number2 = uistate.value.number2.toString()
+                number2 = number2
             )
         }
     }

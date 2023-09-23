@@ -24,12 +24,10 @@ fun AppScreen(
     calculator(
         number1 = uistate.number1,
         number2 = uistate.number2,
-        onNumberOneChange = {
-            viewModel.UpDateNum1(it)
-        },
-        onNumberTwoChange = {
-            viewModel.UpdateNum2(it)
-        }
+        uiState = uistate,
+        onNumberOneChange = { viewModel.UpDateNum1(it) },
+        onNumberTwoChange = { viewModel.UpdateNum2(it) },
+        viewModel = GameViewModel()
     )
 }
 
@@ -70,6 +68,6 @@ fun calculator(
         Button(onClick = { viewModel.findSum() }) {
             Text(text = "Find Sum")
         }
-        Text(text = "${uiState.outPut}")
+        Text(text = "Output: ${uiState.outPut}")
     }
 }
