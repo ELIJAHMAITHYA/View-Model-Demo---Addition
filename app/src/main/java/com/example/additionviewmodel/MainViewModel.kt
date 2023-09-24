@@ -10,7 +10,9 @@ class GameViewModel : ViewModel() {
     val uistate = _uiState.asStateFlow()
 
     fun findSum() {
-        var output =_uiState.value.number1.toInt() + _uiState.value.number2.toInt()
+        val num1 = _uiState.value.number1.toIntOrNull() ?: 0
+        val num2 =  _uiState.value.number2.toIntOrNull() ?: 0
+        var output = num1 + num2
         _uiState.update {
             it.copy(
                 outPut = output.toString()
