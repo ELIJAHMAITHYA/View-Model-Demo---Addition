@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun AppScreen(
-    viewModel: GameViewModel// = androidx.lifecycle.viewmodel.compose.viewModel(),
+    viewModel: GameViewModel,
 ) {
     val uistate = viewModel.uistate.collectAsState().value
     calculator(
@@ -27,7 +27,10 @@ fun AppScreen(
         uiState = uistate,
         onNumberOneChange = { viewModel.UpDateNum1(it) },
         onNumberTwoChange = { viewModel.UpdateNum2(it) },
-        viewModel = GameViewModel()
+        viewModel = viewModel,
+        onButtonClick = {
+            viewModel.findSum()
+        }
     )
 }
 
@@ -39,6 +42,7 @@ fun calculator(
     uiState: UiState,
     onNumberOneChange: (String) -> Unit,
     onNumberTwoChange: (String) -> Unit,
+    onButtonClick : () -> Unit,
     viewModel: GameViewModel
 
 ) {
@@ -65,7 +69,7 @@ fun calculator(
             },
             onValueChange = onNumberTwoChange
         )
-        Button(onClick = { viewModel.findSum() }) {
+        Button(onClick =onButtonClick) {
             Text(text = "Find Sum")
         }
         Text(text = "Output: ${uiState.outPut}")
